@@ -37,3 +37,56 @@ console.log("obj[0] --> ", obj[0]);
 console.log("** We can expect the same behavior of arrays when trying to access an object´s element whose index is a number using brackets **");
 console.log("Finally, we would be tempted to check the object´s length, but this property doesn´t exist in an object (undefined). It appears that array has some exclusive properties and methods!")
 console.log("obj.length --> ", obj.length);
+
+// Destructuring
+console.log("\n----------- Destructuring -----------\n")
+console.log('Array Destructuring');
+let fl = ['Clojure', 'Lisp', 'Scala', 'Elixir']
+let [a, b, c, d, e] = fl;
+let [cloj, , , elix] = fl;
+let [cl, ...others] = fl;
+console.log(`Array -> `, fl, `
+[a, b, c, d, e] = ['Clojure', 'Lisp', 'Scala', 'Elixir']
+a = ${a}  b = ${b}  c = ${c}  d = ${d}
+
+[cloj, , , elix] = ['Clojure', 'Lisp', 'Scala', 'Elixir']
+cloj = ${cloj}  elix = ${elix}
+
+[cl, ...others] = ['Clojure', 'Lisp', 'Scala', 'Elixir']
+cl = ${cl}  others = `, others, `
+`);
+
+
+console.log('Array destructuring as arguments of functions');
+let getFirstLanguage = function ([first, second, ...rest]) {
+  console.log(`Primeira: ${first} - Segunda: ${second}`);
+  console.log("Resto: ", rest);
+}
+getFirstLanguage(fl);
+
+console.log("Object Desctructuring");
+
+const peso = "PesoKG";
+const pedro = {
+  nome: 'Pedro',
+  idade: 38,
+  altura: 171,
+  endCasa: { rua: 'Rua inexistente, 70'},
+  endEntrega: { rua: 'Rua que Sobe mas não Desce, 12' },
+  [peso]: 75,
+  [Symbol.for('corFavorita')]: 'Laranja',
+};
+console.log(pedro);
+let { nome, idade } = pedro;
+console.log(`Nome: ${nome}   Idade: ${idade}`);
+
+console.log("As propriedades do objeto não são posicionais, portanto deve-se citar o nome da propriedade, independente de sua posição.");
+let { age, endEntrega, endCasa} = pedro;
+console.log(
+`Age não existe no objeto. Portanto seu valor é undefined.
+Age: ${age}
+End. de casa: `, endCasa, `
+End. de entrega: `, endEntrega
+);
+
+console.log("Extracting When Passing to a Function")
